@@ -3,11 +3,12 @@ import Context from './context';
 
 class Provider extends React.Component{
     state={
-        value: "hello"
+        username: "",
+        password: "",
     }
     render(){
         return(
-            <Context.Provider value ={ {value: this.state.value}} >
+            <Context.Provider value ={ {username: this.state.username} , {password : this.state.password}} >
                 {this.props.children}
             </Context.Provider>
         )
