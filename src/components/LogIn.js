@@ -3,18 +3,46 @@ import React from 'react';
 import './stylesheets/LogIn.css';
 
 class LogIn extends React.Component{
+    state={
+        username: "",
+        password: "",
+    }
+    
+    handleUserName = (e) =>{
+        this.setState({
+            username: e.target.value
+        })
+    }
+
+    handlePassword = (e) => {
+        this.setState({
+            password : e.target.value
+        })
+    }
+
+    handleKeyDown = (e) => {
+        e.key === 'Enter' &&
+        this.login();
+    }
+
+    login = () => {
+        this.state.username.trim() !== "" &&
+        this.state.password.trim() !== "" && 
+        this.props.handleLogIn(this.state.username, this.state.password)
+    }
+    
     render(){
         return(
                     <div className="log-in-container">
                         <span>
                             Username:
-                            <input type="name" value={this.props.username} />
+                            <input type="name" value={this.state.username} onChange={this.handleUserName} />
                         </span>
                         <span>
                             Password:
-                            <input type="password" value={this.props.password} />
+                            <input type="password" value={this.state.password} onChange={this.handlePassword} onKeyDown={this.handleKeyDown} />
                         </span>
-                        <button onClick={this.props.login}>Log In</button>
+                        <button onClick={this.login}>Log In</button>
                         <p>Don't have an account? <strong>Click here</strong> to sign up </p>
                     </div>
         )
