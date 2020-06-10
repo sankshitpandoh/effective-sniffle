@@ -8,7 +8,8 @@ class MainDisplay extends React.Component{
     state={
         username: "",
         password: "",
-        logInPage: true
+        logInPage: true,
+        uNameAvailable: true
     }
 
     handleLogIn = (x,y) =>{
@@ -36,7 +37,29 @@ class MainDisplay extends React.Component{
             logInPage : !this.state.logInPage 
         })
     }
-    
+
+    handleSignUpUserName = (x) => {
+        let flag = false
+        for(let i = 0; i < data.length; i++){
+            if(data[i].username === x){
+                flag = true;
+                break;
+            }
+        }
+        flag ?
+        this.setState({
+            uNameAvailable: false
+        })
+        :
+        this.setState({
+            uNameAvailable: true
+        })
+    }
+
+    registerUser = () => {
+        console.log("successfully registered")
+    }
+
     render(){
         return(
             <div className="pageWrapper">
@@ -44,7 +67,7 @@ class MainDisplay extends React.Component{
                     this.state.logInPage ?
                         <LogIn handleLogIn = {this.handleLogIn} signUp = {this.switchPage} />
                         :
-                        <SignUp />
+                        <SignUp checkUserName = {this.handleSignUpUserName} uNameAvailable = {this.state.uNameAvailable} registerUser = {this.registerUser} />
                 }
             </div>
         )
