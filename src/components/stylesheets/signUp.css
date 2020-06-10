@@ -8,15 +8,26 @@
     border-radius: 10px;
 }
 .sign-up-container span{
-    margin-bottom: 15px;
     display: flex;
     flex-direction: column;
     color: #494949;
+    font-family: 'Montserrat-Bold';
+    margin-bottom: 25px;
+    position: relative;
+}
+.sign-up-container span p{
+    position: absolute;
+    left: 80%;
 }
 .sign-up-container span input{
     border: 0;
     background-color: transparent;
     border-bottom: 2px solid #FFF; 
+    font-family: 'Montserrat-Regular';
+}
+.sign-up-container span input::placeholder{
+    opacity: 0.35;
+    color: #FFF;
 }
 .sign-up-container button{
     width: 30%;
@@ -29,14 +40,21 @@
     cursor: pointer;
     transition: 0.5s all;
     border: 1px solid #FFF;
+    font-family: 'Montserrat-Bold';
+}
+.sign-up-container button:hover{
+    background-color: transparent;
+    color: #FFF;
 }
 .sign-up-container button:disabled{
     background-color: rgba(255,255,255,0.75);
     color: #FFF;
+    cursor: default;
 }
-/* .sign-up-container p{
+.sign-up-container p{
     text-align: center;
     font-size: 14px;
+    font-family: 'Montserrat-Light';
 }
 .sign-up-container p strong{
     transition: 0.5s all;
@@ -44,4 +62,4 @@
 }
 .sign-up-container p strong:hover{
     text-decoration: underline;
-} */
+}

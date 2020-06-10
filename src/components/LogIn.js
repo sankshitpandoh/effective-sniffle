@@ -36,11 +36,11 @@ class LogIn extends React.Component{
                     <div className="log-in-container">
                         <span>
                             Username:
-                            <input type="text" value={this.state.username} onChange={this.handleUserName} />
+                            <input type="text" value={this.state.username} onChange={this.handleUserName} placeholder="Enter Username here" />
                         </span>
                         <span>
                             Password:
-                            <input type="password" value={this.state.password} onChange={this.handlePassword} onKeyDown={this.handleKeyDown} />
+                            <input type="password" value={this.state.password} onChange={this.handlePassword} onKeyDown={this.handleKeyDown} placeholder="Enter password here"/>
                         </span>
                         <button onClick={this.login}>Log In</button>
                         <p>Don't have an account? <strong onClick={this.props.signUp}>Click here</strong> to sign up </p>
