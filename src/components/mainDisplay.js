@@ -2,6 +2,7 @@ import React from 'react';
 import './stylesheets/mainDisplay.css';
 import LogIn from './LogIn';
 import SignUp from './SignUp';
+import fs from 'fs';
 import data from './data/loginData.json';
 
 class MainDisplay extends React.Component{
@@ -58,6 +59,16 @@ class MainDisplay extends React.Component{
 
     registerUser = () => {
         console.log("successfully registered")
+        // fs.readFile('./data/loginData.json', function (err, OldData) {
+        //     let dataArray = JSON.parse(OldData);
+        //     console.log(dataArray)
+        //     dataArray.push(data);
+        //     // console.log(JSON.stringify(dataArray))    
+        //     fs.writeFile("./data/data.json", JSON.stringify(dataArray), function(err){
+        //       if (err) throw err;
+        //       console.log('The user was ');
+        //     });
+        // })  
     }
 
     render(){

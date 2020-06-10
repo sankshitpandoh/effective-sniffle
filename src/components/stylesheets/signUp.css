@@ -4,18 +4,35 @@
     width: 50%;
     margin: 0 auto;
     padding: 50px;
-    background-color: #D6D3F0;
+    background-color: #FF5D73;
     border-radius: 10px;
 }
 .sign-up-container span{
     margin-bottom: 15px;
     display: flex;
     flex-direction: column;
+    color: #494949;
+}
+.sign-up-container span input{
+    border: 0;
+    background-color: transparent;
+    border-bottom: 2px solid #FFF; 
 }
 .sign-up-container button{
     width: 30%;
     margin-left: auto;
     margin-bottom: 20px;
+    border: 0;
+    background-color: #FFF;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.5s all;
+    border: 1px solid #FFF;
+}
+.sign-up-container button:disabled{
+    background-color: rgba(255,255,255,0.75);
+    color: #FFF;
 }
 /* .sign-up-container p{
     text-align: center;
