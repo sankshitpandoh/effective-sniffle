@@ -30,20 +30,20 @@ class LogIn extends React.Component{
         this.state.password.trim() !== "" && 
         this.props.handleLogIn(this.state.username, this.state.password)
     }
-    
+
     render(){
         return(
                     <div className="log-in-container">
                         <span>
                             Username:
-                            <input type="name" value={this.state.username} onChange={this.handleUserName} />
+                            <input type="text" value={this.state.username} onChange={this.handleUserName} />
                         </span>
                         <span>
                             Password:
                             <input type="password" value={this.state.password} onChange={this.handlePassword} onKeyDown={this.handleKeyDown} />
                         </span>
                         <button onClick={this.login}>Log In</button>
-                        <p>Don't have an account? <strong>Click here</strong> to sign up </p>
+                        <p>Don't have an account? <strong onClick={this.props.signUp}>Click here</strong> to sign up </p>
                     </div>
         )
     }

@@ -1,0 +1,30 @@
+.sign-up-container{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 0 auto;
+    padding: 50px;
+    background-color: #D6D3F0;
+    border-radius: 10px;
+}
+.sign-up-container span{
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.sign-up-container button{
+    width: 30%;
+    margin-left: auto;
+    margin-bottom: 20px;
+}
+/* .sign-up-container p{
+    text-align: center;
+    font-size: 14px;
+}
+.sign-up-container p strong{
+    transition: 0.5s all;
+    cursor: pointer;
+}
+.sign-up-container p strong:hover{
+    text-decoration: underline;
+} */

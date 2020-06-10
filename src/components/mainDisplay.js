@@ -8,7 +8,7 @@ class MainDisplay extends React.Component{
     state={
         username: "",
         password: "",
-        currentPage: "login"
+        logInPage: true
     }
 
     handleLogIn = (x,y) =>{
@@ -30,13 +30,19 @@ class MainDisplay extends React.Component{
             console.log(this.state.username)
         } )
     }
+
+    switchPage = () =>{
+        this.setState({
+            logInPage : !this.state.logInPage 
+        })
+    }
     
     render(){
         return(
             <div className="pageWrapper">
                 {
-                    this.state.currentPage === "login" ?
-                        <LogIn handleLogIn = {this.handleLogIn} />
+                    this.state.logInPage ?
+                        <LogIn handleLogIn = {this.handleLogIn} signUp = {this.switchPage} />
                         :
                         <SignUp />
                 }
