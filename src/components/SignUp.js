@@ -57,6 +57,7 @@ class SignUp extends React.Component{
     render(){
         return(
             <div className="sign-up-container">
+                <h1>Create a new account</h1>
                 <span>
                     Enter a Username: {!this.props.uNameAvailable && <p>username not available</p>}
                     <input type="text" value= {this.state.username} onChange={this.handleUserName} placeholder="Enter User name here" />
@@ -70,7 +71,7 @@ class SignUp extends React.Component{
                     <input type="password" value= {this.state.rePassword} onChange={this.handleRePassword} placeholder="Re-type you password here" />
                 </span>
                 <button disabled={this.state.disabled || !this.props.uNameAvailable} onClick={this.signUp}>Sign Up</button>
-                <p>Already have an account? <strong onClick={this.props.signUp}>Click here</strong> to Log In </p>
+                <p>Already have an account? <strong onClick={this.props.LogIn}>Click here</strong> to Log In </p>
             </div>
         )
     }

@@ -34,6 +34,7 @@ class LogIn extends React.Component{
     render(){
         return(
                     <div className="log-in-container">
+                    <h1>Log In </h1>
                         <span>
                             Username:
                             <input type="text" value={this.state.username} onChange={this.handleUserName} placeholder="Enter Username here" />

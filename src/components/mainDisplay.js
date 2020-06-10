@@ -78,7 +78,7 @@ class MainDisplay extends React.Component{
                     this.state.logInPage ?
                         <LogIn handleLogIn = {this.handleLogIn} signUp = {this.switchPage} />
                         :
-                        <SignUp checkUserName = {this.handleSignUpUserName} uNameAvailable = {this.state.uNameAvailable} registerUser = {this.registerUser} />
+                        <SignUp checkUserName = {this.handleSignUpUserName} uNameAvailable = {this.state.uNameAvailable} registerUser = {this.registerUser} LogIn = {this.switchPage} />
                 }
             </div>
         )
