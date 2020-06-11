@@ -3,7 +3,40 @@ import '../stylesheets/settings.css';
 
 class Settings extends React.Component{
     state={
-        showPassword: false
+        oldPassword: "",
+        newPassword: "",
+        reNewPassword: "",
+        showPassword: false,
+        disabled: true,
+        pMatch: true
+    }
+
+    handleNewPassword = (e) => {
+        this.setState({
+            newPassword : e.target.value
+        }, () => {
+            this.checkPasswords()
+        })
+    }
+
+    handleReNewPassword = (e) => {
+        this.setState({
+            reNewPassword : e.target.value
+        },() => {
+            this.checkPasswords()
+        })
+    }
+    checkPasswords = () => {
+        this.state.newPassword === this.state.reNewPassword ?
+        this.setState({
+            disabled: false,
+            pMatch: true
+        })
+        :
+        this.setState({
+            disabled: true,
+            pMatch: false
+        })
     }
     
     displayPassword = (e) => {
@@ -30,18 +63,19 @@ class Settings extends React.Component{
                     <h3>Change Password</h3>
                     <span>
                         Enter Old Password:
-                        <input type="password" placeholder="old password here"/>
+                        <input type="password" value={this.state.oldPassword} placeholder="old password here"/>
                     </span>
                     <span>
                         Enter New Password:
-                        <input type="password" placeholder="new password here"/>
+                        <input type="password" value={this.state.newPassword} onChange={this.handleNewPassword} placeholder="new password here"/>
                         <button onMouseDown={this.displayPassword} onMouseUp={this.displayPassword}>Show</button>
                     </span>
                     <span>
                         Enter New Password Again:
-                        <input type="password" placeholder="re enter new password here"/>
+                        <input type="password" value={this.state.reNewPassword} onChange={this.handleReNewPassword} placeholder="re enter new password here"/>
                         <button onMouseDown={this.displayPassword} onMouseUp={this.displayPassword}>Show</button>
                     </span>
+                    <button disabled={this.state.disabled}>Update Password</button>
                 </div>
             </div>
         )

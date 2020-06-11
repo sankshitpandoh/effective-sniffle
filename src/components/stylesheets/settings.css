@@ -31,6 +31,16 @@
     border-radius: 0;
     border: 0;
     cursor: pointer;
+    width: 10%;
+    font-family: 'Montserrat-Regular';
+    padding: 5px;
+    transition: 0.5s all;
+    background-color: #000;
+    color: #fff;
+}
+.settings-main-display .password-change span button:hover{
+    background-color: #fff;
+    color: #000;
 }
 .settings-main-display .password-change input{
     font-family: 'Montserrat-Light';
@@ -38,4 +48,26 @@
     border: 0;
     border-bottom: 2px solid #000;
     padding: 5px 0 0 0;
+}
+.settings-main-display button{
+    width: 25%;
+    background-color: #F7567C;
+    border: 0;
+    padding: 15px 5px;
+    cursor: pointer;
+    color: #000;
+    transition: 0.5s all;
+    font-family: 'Montserrat-Regular';
+}
+.settings-main-display button:hover{
+    background-color: #000;
+    color: #F7567C;;
+}
+.settings-main-display button:disabled{
+    opacity: 0.5;
+    cursor: default;
+}
+.settings-main-display button:disabled:hover{
+    background-color: #F7567C;
+    color: #000;
 }
