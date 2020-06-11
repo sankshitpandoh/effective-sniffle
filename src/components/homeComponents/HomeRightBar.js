@@ -16,7 +16,7 @@ class HomeRightBar extends React.Component{
                     <h3>{x}</h3>
                 </div>
                 :
-                <div key={index} className = "single-option">
+                <div onClick={() => {this.props.makeActive(index)}} key={index} className = "single-option">
                     <h3>{x}</h3>
                 </div>
         })
