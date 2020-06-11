@@ -11,6 +11,14 @@ class Settings extends React.Component{
         pMatch: true
     }
 
+    handleOldPassword = (e) => {
+        this.setState({
+            oldPassword : e.target.value
+        }, () => {
+            this.checkPasswords()
+        })
+    }
+
     handleNewPassword = (e) => {
         this.setState({
             newPassword : e.target.value
@@ -26,7 +34,10 @@ class Settings extends React.Component{
             this.checkPasswords()
         })
     }
+    
     checkPasswords = () => {
+        /* TODO:
+        Make button disabled if old password has not been entered */
         this.state.newPassword === this.state.reNewPassword ?
         this.setState({
             disabled: false,
@@ -63,7 +74,7 @@ class Settings extends React.Component{
                     <h3>Change Password</h3>
                     <span>
                         Enter Old Password:
-                        <input type="password" value={this.state.oldPassword} placeholder="old password here"/>
+                        <input type="password" value={this.state.oldPassword} onChange={this.handleOldPassword} placeholder="old password here"/>
                     </span>
                     <span>
                         Enter New Password:
@@ -71,7 +82,7 @@ class Settings extends React.Component{
                         <button onMouseDown={this.displayPassword} onMouseUp={this.displayPassword}>Show</button>
                     </span>
                     <span>
-                        Enter New Password Again:
+                        Enter New Password Again: {!this.state.pMatch && <p>Passwords don't match</p>}
                         <input type="password" value={this.state.reNewPassword} onChange={this.handleReNewPassword} placeholder="re enter new password here"/>
                         <button onMouseDown={this.displayPassword} onMouseUp={this.displayPassword}>Show</button>
                     </span>
