@@ -9,14 +9,22 @@ import './index.css';
 
 class App extends React.Component{
   state={
-    userLoggedIn: false
+    userLoggedIn: false,
+    currentUser: ""
   };
 
-  logUserIn = () => {
+  logUserIn = (x) => {
     this.setState({
-      userLoggedIn: true
+      userLoggedIn: true,
+      currentUser: x
     }, () => {
-      console.log("User lgoged in")
+      console.log("User logged in")
+    })
+  }
+  logOut = () => {
+    this.setState({
+      userLoggedIn: false,
+      currentUser: ""
     })
   }
 
@@ -25,7 +33,7 @@ class App extends React.Component{
       <>
           {
             this.state.userLoggedIn ?
-            <Home />
+            <Home user = {this.state.currentUser} logOut = {this.logOut} />
             :
             <MainDisplay logUserIn = {this.logUserIn} />
           }

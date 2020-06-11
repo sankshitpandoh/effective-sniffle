@@ -28,7 +28,7 @@ class LogIn extends React.Component{
     login = () => {
         this.state.username.trim() !== "" &&
         this.state.password.trim() !== "" && 
-        this.props.handleLogIn(this.state.username, this.state.password)
+        this.props.handleLogIn(this.state.username, this.state.password);
     }
 
     render(){

@@ -1,0 +1,17 @@
+.home-main-display{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px 20px 0 30px;
+    background-color: #4B4E6D;
+}
+.home-main-display h1{
+    font-family: 'Montserrat-Bold';
+    text-transform: capitalize;
+    color: yellow;
+}
+.home-main-display span{
+    font-family: 'Montserrat-Light';
+    font-size: 25px;
+    color: #fff;
+}

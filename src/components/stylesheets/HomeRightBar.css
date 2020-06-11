@@ -1,0 +1,26 @@
+.right-bar-container{
+    display: flex;
+    width: 20%;
+    flex-direction: column;
+    padding: 20px 5px ;
+    background-color: #99E1D9;
+}
+.right-bar-container .single-option{
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid #F7567C;
+    padding: 10px 0;
+    cursor: pointer;
+    transition: 0.75s all;
+    background-color: #F7567C;
+    margin-bottom: 5px;
+    font-family: 'Montserrat-Regular';
+}
+.right-bar-container .single-option:hover{
+    border-bottom: 2px solid #000;
+    background-color: transparent;
+}
+.right-bar-container .active-option{
+    border-bottom: 2px solid #000 !important;
+    background-color: transparent !important;
+}
