@@ -8,7 +8,6 @@ class SignUp extends React.Component{
         rePassword: "",
         disabled: true,
         pMatch: true
-
     }
 
     handleUserName = (e) =>{

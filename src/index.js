@@ -13,6 +13,8 @@ class App extends React.Component{
     currentUser: ""
   };
 
+  /* Function that provides the currentUser value in to state and 
+    renders the home component with current user */
   logUserIn = (x) => {
     this.setState({
       userLoggedIn: true,
@@ -21,6 +23,9 @@ class App extends React.Component{
       console.log("User logged in")
     })
   }
+
+  /* Function that empties the current user state and 
+    logs out the user */
   logOut = () => {
     this.setState({
       userLoggedIn: false,
@@ -31,6 +36,9 @@ class App extends React.Component{
   render(){
     return(
       <>
+          {/* If the user is looged in, 
+          it loads the Home component with username of the user, 
+          else it loads the Main display component */}
           {
             this.state.userLoggedIn ?
             <Home user = {this.state.currentUser} logOut = {this.logOut} />

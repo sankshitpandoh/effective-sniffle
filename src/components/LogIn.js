@@ -8,23 +8,32 @@ class LogIn extends React.Component{
         password: "",
     }
     
+    /* sets the username state to what the 
+        user is inputting in thr username box */
     handleUserName = (e) =>{
         this.setState({
             username: e.target.value
         })
     }
 
+    /* sets the password state to what the 
+        user is inputting in thr password box */
     handlePassword = (e) => {
         this.setState({
             password : e.target.value
         })
     }
 
+    /* Function that triggers log in 
+        if the enter key is pressed */
     handleKeyDown = (e) => {
         e.key === 'Enter' &&
         this.login();
     }
 
+    /* Function that validates whether the username and 
+        password fields are not empty and then passes 
+        those values to function that triggers login */
     login = () => {
         this.state.username.trim() !== "" &&
         this.state.password.trim() !== "" && 
@@ -33,7 +42,7 @@ class LogIn extends React.Component{
 
     render(){
         return(
-                    <div className="log-in-container">
+                <div className="log-in-container">
                     <h1>Log In </h1>
                         <span>
                             Username:
@@ -45,7 +54,7 @@ class LogIn extends React.Component{
                         </span>
                         <button onClick={this.login}>Log In</button>
                         <p>Don't have an account? <strong onClick={this.props.signUp}>Click here</strong> to sign up </p>
-                    </div>
+                </div>
         )
     }
 }
