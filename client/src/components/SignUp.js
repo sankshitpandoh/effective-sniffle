@@ -7,17 +7,18 @@ class SignUp extends React.Component{
         password: "",
         rePassword: "",
         disabled: true,
-        pMatch: true
+        pMatch: true,
     }
 
     handleUserName = (e) =>{
         this.setState({
             username: e.target.value
-        }, () => {
-            this.props.checkUserName(this.state.username)
         })
     }
 
+    deFocused = () =>{
+        this.props.checkUserName(this.state.username)
+    }
     handlePassword = (e) => {
         this.setState({
             password : e.target.value
@@ -33,6 +34,7 @@ class SignUp extends React.Component{
             this.checkPasswords()
         })
     }
+
     checkPasswords = () => {
         this.state.password === this.state.rePassword ?
         this.setState({
@@ -59,7 +61,7 @@ class SignUp extends React.Component{
                 <h1>Create a new account</h1>
                 <span>
                     Enter a Username: {!this.props.uNameAvailable && <p>username not available</p>}
-                    <input type="text" value= {this.state.username} onChange={this.handleUserName} placeholder="Enter User name here" />
+                    <input type="text" value= {this.state.username} onChange={this.handleUserName} placeholder="Enter User name here" onBlur={this.deFocused} />
                 </span>
                 <span>
                     Enter Password:
