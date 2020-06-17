@@ -42,23 +42,27 @@ class MainDisplay extends React.Component{
         })
     }
 
-    // handleSignUpUserName = (x) => {
-    //     let flag = false
-    //     for(let i = 0; i < data.length; i++){
-    //         if(data[i].username === x){
-    //             flag = true;
-    //             break;
-    //         }
-    //     }
-    //     flag ?
-    //     this.setState({
-    //         uNameAvailable: false
-    //     })
-    //     :
-    //     this.setState({
-    //         uNameAvailable: true
-    //     })
-    // }
+    handleSignUpUserName = async(x) => {
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: x })
+        };
+        const response = await fetch('/api/checkUserName', requestOptions);
+        let serverResponse = await response.json();
+        let flag = serverResponse.userNameAvailable; 
+        console.log(flag)
+
+        !flag ?
+        this.setState({
+            uNameAvailable: false
+        })
+        :
+        this.setState({
+            uNameAvailable: true
+        })
+    }
 
     registerUser = () => {
         console.log("successfully registered")

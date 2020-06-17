@@ -24,14 +24,26 @@ app.post('/api/loginUser', (req,res) => {
         break;
       }
     }
-    if(userExist){
-      res.send({userExist: userExist})
+      res.send({userExist: userExist});
+  });
+});
+
+app.post('/api/checkUserName' , (req, res) => {
+  fs.readFile('./data/loginData.json' , (err,data) => {
+    let dataArray = JSON.parse(data);
+    console.log(dataArray)
+    let userNameAvailable = true;
+    for(let i = 0; i < dataArray.length; i++){
+      if(dataArray[i].username === req.body.username){
+        userNameAvailable = false;
+        break;
+      }
     }
-    else{
-      res.send({userExist: false})
-    }
-  })
-})
+    console.log(userNameAvailable)
+    console.log(req.body)
+    res.send({userNameAvailable: userNameAvailable})
+  });
+});
 
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
