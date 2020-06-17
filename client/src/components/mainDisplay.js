@@ -2,8 +2,7 @@ import React from 'react';
 import './stylesheets/mainDisplay.css';
 import LogIn from './LogIn';
 import SignUp from './SignUp';
-// import fs from 'fs';
-import data from './data/loginData.json';
+// import data from './data/loginData.json';
 
 class MainDisplay extends React.Component{
 
@@ -17,20 +16,20 @@ class MainDisplay extends React.Component{
 
     /* Function which handles the user login
         it takes 2 arguments, x is username and y is password  */
-    handleLogIn = (x,y) =>{
-        let userExist = false;
-        /* loops through the data file to check whether the user details are correct */
-        for(let i = 0; i < data.length; i++){
-            if(data[i].username === x && data[i].password === y  ){
-                /* if user exists, it changes the value of userExist to true and breaks out of the loop */
-                userExist = true;
-                break;
-            }
-        }
+    handleLogIn = async (x,y) =>{
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: x , password: y })
+        };
+        const response = await fetch('/api/loginUser', requestOptions);
+        let serverResponse = await response.json();
+
         /* if user exists, then it triggers the function which logs in the user */
-        userExist && 
+        serverResponse.userExist && 
         this.props.logUserIn(x)
     }
+
 
     /* Function that switches 
         the login page from 
@@ -43,23 +42,23 @@ class MainDisplay extends React.Component{
         })
     }
 
-    handleSignUpUserName = (x) => {
-        let flag = false
-        for(let i = 0; i < data.length; i++){
-            if(data[i].username === x){
-                flag = true;
-                break;
-            }
-        }
-        flag ?
-        this.setState({
-            uNameAvailable: false
-        })
-        :
-        this.setState({
-            uNameAvailable: true
-        })
-    }
+    // handleSignUpUserName = (x) => {
+    //     let flag = false
+    //     for(let i = 0; i < data.length; i++){
+    //         if(data[i].username === x){
+    //             flag = true;
+    //             break;
+    //         }
+    //     }
+    //     flag ?
+    //     this.setState({
+    //         uNameAvailable: false
+    //     })
+    //     :
+    //     this.setState({
+    //         uNameAvailable: true
+    //     })
+    // }
 
     registerUser = () => {
         console.log("successfully registered")
