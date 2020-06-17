@@ -39,10 +39,11 @@ class Settings extends React.Component{
         /* TODO:
         Make button disabled if old password has not been entered */
         this.state.newPassword === this.state.reNewPassword ?
-        this.setState({
-            disabled: false,
-            pMatch: true
-        })
+            this.state.newPassword !== "" &&
+                this.setState({
+                    disabled: false,
+                    pMatch: true
+                })
         :
         this.setState({
             disabled: true,
@@ -64,7 +65,16 @@ class Settings extends React.Component{
         }, () =>{
             e.target.previousSibling.type = "text";
         })
-        // console.log(e.target.previousSibling.type)
+    }
+
+    changePassword = async() => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: this.props.user , oldPassword: this.state.oldPassword, newPassword: this.state.newPassword })
+        };
+        const response = await fetch('/api/changePassword', requestOptions);
+        let serverResponse = await response.json();
     }
 
     render(){
@@ -86,7 +96,7 @@ class Settings extends React.Component{
                         <input type="password" value={this.state.reNewPassword} onChange={this.handleReNewPassword} placeholder="re enter new password here"/>
                         <button onMouseDown={this.displayPassword} onMouseUp={this.displayPassword}>Show</button>
                     </span>
-                    <button disabled={this.state.disabled}>Update Password</button>
+                    <button onClick = {this.changePassword} disabled={this.state.disabled}>Update Password</button>
                 </div>
             </div>
         )
