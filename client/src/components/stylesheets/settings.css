@@ -83,3 +83,22 @@
     background-color: #F7567C;
     color: #000;
 }
+.message-container{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    color: white;
+    padding: 5px;
+}
+.message-container p{
+    font-family: 'Montserrat-Light';
+}
+.changed{
+    background-color: green;
+}
+.error{
+    background-color: red;
+}

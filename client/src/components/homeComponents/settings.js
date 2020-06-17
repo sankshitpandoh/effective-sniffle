@@ -8,7 +8,9 @@ class Settings extends React.Component{
         reNewPassword: "",
         showPassword: false,
         disabled: true,
-        pMatch: true
+        pMatch: true,
+        hoverMessage: false,
+        changeStatus: ""
     }
 
     handleOldPassword = (e) => {
@@ -75,11 +77,36 @@ class Settings extends React.Component{
         };
         const response = await fetch('/api/changePassword', requestOptions);
         let serverResponse = await response.json();
+        this.setState({
+            hoverMessage: true,
+            changeStatus: serverResponse.passwordChange,
+            oldPassword: "",
+            newPassword: "",
+            reNewPassword: "",
+        }, () => {
+            setTimeout( function(){
+                this.setState({
+                    hoverMessage: false,
+                    changeStatus: ""
+                })
+            }.bind(this), 2000)
+        }) 
+
     }
 
     render(){
         return(
             <div className="settings-main-display">
+                {this.state.hoverMessage &&
+                    <div
+                    className={"message-container " + (this.state.changeStatus ? 'changed' : 'error')}>
+                        {this.state.changeStatus ?
+                            <p>Password changed successfully!</p>
+                            :
+                            <p>Incorrect Old Password</p>
+                        }
+                    </div>
+                }
                 <div className="password-change">
                     <h3>Change Password</h3>
                     <span>
