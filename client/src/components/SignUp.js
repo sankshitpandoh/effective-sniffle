@@ -52,7 +52,7 @@ class SignUp extends React.Component{
         this.state.username.trim() !== "" &&
         this.state.password.trim() !== "" && 
         this.state.rePassword.trim() !== "" &&
-        this.props.registerUser();
+        this.props.registerUser(this.state.username, this.state.password);
     }
 
     render(){

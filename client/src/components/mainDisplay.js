@@ -12,6 +12,7 @@ class MainDisplay extends React.Component{
         password: "",
         logInPage: true, /* if it is true, then the login component is rendered, if it is false, then the signUp component is rendered */
         uNameAvailable: true,
+        hoverMenu: false
     }
 
     /* Function which handles the user login
@@ -64,19 +65,28 @@ class MainDisplay extends React.Component{
         })
     }
 
-    registerUser = () => {
-        console.log("successfully registered")
-        // fs.readFile('./data/loginData.json', function (err, OldData) {
-        //     let dataArray = JSON.parse(OldData);
-        //     console.log(dataArray)
-        //     dataArray.push(data);
-        //     // console.log(JSON.stringify(dataArray))    
-        //     fs.writeFile("./data/logindata.json", JSON.stringify(dataArray), function(err){
-        //       if (err) throw err;
-        //       console.log('The user was ');
-        //     });
-        // })  
+    registerUser = async(x , y) => {
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: x , password: y })
+        };
+        const response = await fetch('/api/signUpUser', requestOptions);
+        let serverResponse = await response.json();
+        serverResponse.userRegistered && 
+            this.setState({
+                logInPage : !this.state.logInPage,
+                hoverMenu: true
+            }, () => {
+                setTimeout( function(){
+                    this.setState({
+                        hoverMenu: false
+                    })
+                }.bind(this), 5000)
+            }) 
     }
+
 
     render(){
         return(
@@ -85,7 +95,7 @@ class MainDisplay extends React.Component{
                     and if it is false, it loads signUp component */}
                 {
                     this.state.logInPage ?
-                        <LogIn handleLogIn = {this.handleLogIn} signUp = {this.switchPage} />
+                        <LogIn handleLogIn = {this.handleLogIn} signUp = {this.switchPage} hoverMenu = {this.state.hoverMenu}  />
                         :
                         <SignUp checkUserName = {this.handleSignUpUserName} uNameAvailable = {this.state.uNameAvailable} registerUser = {this.registerUser} LogIn = {this.switchPage} />
                 }

@@ -39,9 +39,23 @@ app.post('/api/checkUserName' , (req, res) => {
         break;
       }
     }
-    console.log(userNameAvailable)
-    console.log(req.body)
     res.send({userNameAvailable: userNameAvailable})
+  });
+});
+
+app.post('/api/signUpUser', (req, res) => {
+  let newUser = {
+    username: req.body.username,
+    password: req.body.password
+  }
+  fs.readFile('./data/loginData.json', (err, data) => {
+    let dataArray = JSON.parse(data);
+    dataArray.push(newUser);
+    fs.writeFile("./data/loginData.json", JSON.stringify(dataArray), function(err){
+      if (err) throw err;
+      console.log('The user was sucessfully registered ');
+      res.send({userRegistered: true})
+    });
   });
 });
 

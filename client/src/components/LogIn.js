@@ -43,6 +43,11 @@ class LogIn extends React.Component{
     render(){
         return(
                 <div className="log-in-container">
+                {this.props.hoverMenu && 
+                    <div className ="hover-message">
+                        Welcome
+                    </div>
+                }
                     <h1>Log In </h1>
                         <span>
                             Username:

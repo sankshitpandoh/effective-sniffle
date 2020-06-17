@@ -59,3 +59,7 @@
 .log-in-container p strong:hover{
     text-decoration: underline;
 }
+
+.hover-menu{
+    background-color: white;
+}
