@@ -12,7 +12,8 @@ class MainDisplay extends React.Component{
         password: "",
         logInPage: true, /* if it is true, then the login component is rendered, if it is false, then the signUp component is rendered */
         uNameAvailable: true,
-        hoverMenu: false
+        hoverMenu: false,
+        incorrectLoginPassword: "false"
     }
 
     /* Function which handles the user login
@@ -27,8 +28,20 @@ class MainDisplay extends React.Component{
         let serverResponse = await response.json();
 
         /* if user exists, then it triggers the function which logs in the user */
-        serverResponse.userExist && 
+        serverResponse.userExist ?
         this.props.logUserIn(x)
+        :
+        this.setState({
+            hoverMenu: true,
+            incorrectLoginPassword: true
+        }, () => {
+            setTimeout( function(){
+                this.setState({
+                    hoverMenu: false,
+                    incorrectLoginPassword: false
+                })
+            }.bind(this), 3000)
+        })
     }
 
 
@@ -95,7 +108,7 @@ class MainDisplay extends React.Component{
                     and if it is false, it loads signUp component */}
                 {
                     this.state.logInPage ?
-                        <LogIn handleLogIn = {this.handleLogIn} signUp = {this.switchPage} hoverMenu = {this.state.hoverMenu}  />
+                        <LogIn handleLogIn = {this.handleLogIn} signUp = {this.switchPage} hoverMenu = {this.state.hoverMenu} incorrectLoginPassword = {this.state.incorrectLoginPassword} />
                         :
                         <SignUp checkUserName = {this.handleSignUpUserName} uNameAvailable = {this.state.uNameAvailable} registerUser = {this.registerUser} LogIn = {this.switchPage} />
                 }

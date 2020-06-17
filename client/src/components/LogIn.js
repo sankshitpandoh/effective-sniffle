@@ -43,9 +43,14 @@ class LogIn extends React.Component{
     render(){
         return(
                 <div className="log-in-container">
-                {this.props.hoverMenu && 
-                    <div className ="hover-message">
-                        <p>Account sucessfully created, log in with your credentials</p>
+                {this.props.hoverMenu &&
+                    <div
+                    className={"message-container " + (this.props.incorrectLoginPassword ? 'error' : 'changed')}>
+                        {this.props.incorrectLoginPassword ?
+                            <p>Incorrect Login Credentials </p>
+                            :
+                            <p>Account sucessfully created, log in with your credentials</p>
+                        }
                     </div>
                 }
                     <h1>Log In </h1>
