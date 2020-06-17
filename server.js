@@ -5,14 +5,7 @@ const fs = require('fs')
 const app = express();
 const port = process.env.PORT || 5000;
 
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({limit: '10mb', extended: true}));
-
-
-app.get('/api/hello', (req, res) => {
-  res.send({ express: 'Hello From Express' });
-});
 
 app.post('/api/loginUser', (req,res) => {
   fs.readFile('./data/loginData.json' , (err, data) => {
@@ -56,6 +49,32 @@ app.post('/api/signUpUser', (req, res) => {
       console.log('The user was sucessfully registered ');
       res.send({userRegistered: true})
     });
+  });
+});
+
+app.post('/api/changePassword', (req, res) => {
+
+  fs.readFile('./data/loginData.json', (err, data) => {
+    let status = false;
+    let dataArray = JSON.parse(data);
+
+    for(let i = 0; i < dataArray.length; i++){
+      if(dataArray[i].username === req.body.username && dataArray[i].password === req.body.oldPassword){
+        dataArray[i].password = req.body.newPassword;
+        status = true;
+        break;
+      }
+    }
+    if(status){
+      fs.writeFile("./data/loginData.json", JSON.stringify(dataArray), function(err){
+        if (err) throw err;
+        console.log('The password was successfully changed');
+        res.send({passwordChange: status})
+      });
+    }
+    else{
+      res.send({passwordChange: status})
+    }
   });
 });
 

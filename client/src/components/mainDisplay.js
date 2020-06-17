@@ -83,7 +83,7 @@ class MainDisplay extends React.Component{
                     this.setState({
                         hoverMenu: false
                     })
-                }.bind(this), 5000)
+                }.bind(this), 3000)
             }) 
     }
 

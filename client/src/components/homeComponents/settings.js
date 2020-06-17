@@ -8,7 +8,9 @@ class Settings extends React.Component{
         reNewPassword: "",
         showPassword: false,
         disabled: true,
-        pMatch: true
+        pMatch: true,
+        hoverMessage: false,
+        changeStatus: ""
     }
 
     handleOldPassword = (e) => {
@@ -39,10 +41,11 @@ class Settings extends React.Component{
         /* TODO:
         Make button disabled if old password has not been entered */
         this.state.newPassword === this.state.reNewPassword ?
-        this.setState({
-            disabled: false,
-            pMatch: true
-        })
+            this.state.newPassword !== "" &&
+                this.setState({
+                    disabled: false,
+                    pMatch: true
+                })
         :
         this.setState({
             disabled: true,
@@ -64,12 +67,46 @@ class Settings extends React.Component{
         }, () =>{
             e.target.previousSibling.type = "text";
         })
-        // console.log(e.target.previousSibling.type)
+    }
+
+    changePassword = async() => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: this.props.user , oldPassword: this.state.oldPassword, newPassword: this.state.newPassword })
+        };
+        const response = await fetch('/api/changePassword', requestOptions);
+        let serverResponse = await response.json();
+        this.setState({
+            hoverMessage: true,
+            changeStatus: serverResponse.passwordChange,
+            oldPassword: "",
+            newPassword: "",
+            reNewPassword: "",
+        }, () => {
+            setTimeout( function(){
+                this.setState({
+                    hoverMessage: false,
+                    changeStatus: ""
+                })
+            }.bind(this), 2000)
+        }) 
+
     }
 
     render(){
         return(
             <div className="settings-main-display">
+                {this.state.hoverMessage &&
+                    <div
+                    className={"message-container " + (this.state.changeStatus ? 'changed' : 'error')}>
+                        {this.state.changeStatus ?
+                            <p>Password changed successfully!</p>
+                            :
+                            <p>Incorrect Old Password</p>
+                        }
+                    </div>
+                }
                 <div className="password-change">
                     <h3>Change Password</h3>
                     <span>
@@ -86,7 +123,7 @@ class Settings extends React.Component{
                         <input type="password" value={this.state.reNewPassword} onChange={this.handleReNewPassword} placeholder="re enter new password here"/>
                         <button onMouseDown={this.displayPassword} onMouseUp={this.displayPassword}>Show</button>
                     </span>
-                    <button disabled={this.state.disabled}>Update Password</button>
+                    <button onClick = {this.changePassword} disabled={this.state.disabled}>Update Password</button>
                 </div>
             </div>
         )

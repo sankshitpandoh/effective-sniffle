@@ -60,6 +60,15 @@
     text-decoration: underline;
 }
 
-.hover-menu{
-    background-color: white;
+.hover-message{
+    background-color: green;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    font-family: 'Montserrat-Light';
+    padding: 5px;
 }
