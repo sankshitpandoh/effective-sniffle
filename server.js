@@ -52,5 +52,31 @@ app.post('/api/signUpUser', (req, res) => {
   });
 });
 
+app.post('/api/changePassword', (req, res) => {
+
+  fs.readFile('./data/loginData.json', (err, data) => {
+    let status = false;
+    let dataArray = JSON.parse(data);
+
+    for(let i = 0; i < dataArray.length; i++){
+      if(dataArray[i].username === req.body.username && dataArray[i].password === req.body.oldPassword){
+        dataArray[i].password = req.body.newPassword;
+        status = true;
+        break;
+      }
+    }
+    if(status){
+      fs.writeFile("./data/loginData.json", JSON.stringify(dataArray), function(err){
+        if (err) throw err;
+        console.log('The password was successfully changed');
+        res.send({passwordChange: status})
+      });
+    }
+    else{
+      res.send({passwordChange: status})
+    }
+  });
+});
+
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
