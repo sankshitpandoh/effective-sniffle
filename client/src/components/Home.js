@@ -8,6 +8,7 @@ class Home extends React.Component{
     state={
         activeOption: 0
     }
+    /* makes the option on which the user clicks, active */
     makeActive = (x) =>{
         this.setState({
             activeOption: x
