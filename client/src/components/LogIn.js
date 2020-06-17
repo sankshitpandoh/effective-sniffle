@@ -45,7 +45,7 @@ class LogIn extends React.Component{
                 <div className="log-in-container">
                 {this.props.hoverMenu && 
                     <div className ="hover-message">
-                        Welcome
+                        <p>Account sucessfully created, log in with your credentials</p>
                     </div>
                 }
                     <h1>Log In </h1>
