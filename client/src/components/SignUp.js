@@ -16,9 +16,16 @@ class SignUp extends React.Component{
         })
     }
 
+    /* Function that is triggered when the user defocuses the username input field */
     deFocused = () =>{
+        /* sends the value of input field to checkusername to check if it is available */
         this.props.checkUserName(this.state.username)
     }
+
+
+    /* Takes an input of  password field, 
+    sets password state to the value and 
+    passes it to check password function */
     handlePassword = (e) => {
         this.setState({
             password : e.target.value
@@ -27,6 +34,9 @@ class SignUp extends React.Component{
         })
     }
 
+    /* Takes an input of  re-password field, 
+    sets rePassword state to the value and 
+    passes it to check password function */
     handleRePassword = (e) => {
         this.setState({
             rePassword : e.target.value
@@ -35,6 +45,7 @@ class SignUp extends React.Component{
         })
     }
 
+    /* checks if the passwords match and then actives the submit button */
     checkPasswords = () => {
         this.state.password === this.state.rePassword ?
         this.setState({
@@ -48,6 +59,7 @@ class SignUp extends React.Component{
         })
     }
 
+    /* function that send the user input data to register user function */
     signUp = () => {
         this.state.username.trim() !== "" &&
         this.state.password.trim() !== "" && 

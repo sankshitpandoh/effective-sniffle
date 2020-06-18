@@ -13,6 +13,9 @@ class Settings extends React.Component{
         changeStatus: ""
     }
 
+    /* Takes an input of old password field, 
+    sets oldpassword state to the value and 
+    passes it to check password function */
     handleOldPassword = (e) => {
         this.setState({
             oldPassword : e.target.value
@@ -21,6 +24,9 @@ class Settings extends React.Component{
         })
     }
 
+    /* Takes input of new password field,
+     sets newpassowrd state to its value and 
+     passes it to check password function */
     handleNewPassword = (e) => {
         this.setState({
             newPassword : e.target.value
@@ -29,6 +35,9 @@ class Settings extends React.Component{
         })
     }
 
+    /* Takes input of re new password,
+     sets renewpassowrd state to its value and
+     passes it to check password function */
     handleReNewPassword = (e) => {
         this.setState({
             reNewPassword : e.target.value
@@ -37,11 +46,13 @@ class Settings extends React.Component{
         })
     }
     
+    /* Checks if the new password is equal to the re eneter new password field */
     checkPasswords = () => {
         /* TODO:
         Make button disabled if old password has not been entered */
         this.state.newPassword === this.state.reNewPassword ?
             this.state.newPassword !== "" &&
+            /* if both passwords are same enables the update password button */
                 this.setState({
                     disabled: false,
                     pMatch: true
@@ -53,6 +64,7 @@ class Settings extends React.Component{
         })
     }
     
+    /* function that allows user to see his/ her typed password */
     displayPassword = (e) => {
         e.persist();
         this.state.showPassword ?
@@ -69,10 +81,13 @@ class Settings extends React.Component{
         })
     }
 
+    /* Function that sends the new password to server to replace the old password with it */
     changePassword = async() => {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            /* the object that is being sent to server
+            it contains, username, old password and new password */
             body: JSON.stringify({ username: this.props.user , oldPassword: this.state.oldPassword, newPassword: this.state.newPassword })
         };
         const response = await fetch('/api/changePassword', requestOptions);

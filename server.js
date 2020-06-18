@@ -7,24 +7,28 @@ const port = process.env.PORT || 5000;
 
 app.use(bodyParser.json({limit: '10mb', extended: true}));
 
+/* API responsible for logging in the user */
 app.post('/api/loginUser', (req,res) => {
+  /* reading data file */
   fs.readFile('./data/loginData.json' , (err, data) => {
     let dataArray = JSON.parse(data);
     let userExist = false
+    /* linear search on the whole array to find the user to log in */
     for(let i = 0; i < dataArray.length; i++){
       if(dataArray[i].username === req.body.username && dataArray[i].password === req.body.password){
         userExist = true;
         break;
       }
     }
+    /* sends a response true if all credentials match, else with false */
       res.send({userExist: userExist});
   });
 });
 
+/* API responsible for checking if the username entered has been use before or not */
 app.post('/api/checkUserName' , (req, res) => {
   fs.readFile('./data/loginData.json' , (err,data) => {
     let dataArray = JSON.parse(data);
-    console.log(dataArray)
     let userNameAvailable = true;
     for(let i = 0; i < dataArray.length; i++){
       if(dataArray[i].username === req.body.username){
@@ -36,6 +40,7 @@ app.post('/api/checkUserName' , (req, res) => {
   });
 });
 
+/* API responsible for registering / signing up a new user */
 app.post('/api/signUpUser', (req, res) => {
   let newUser = {
     username: req.body.username,
@@ -52,8 +57,8 @@ app.post('/api/signUpUser', (req, res) => {
   });
 });
 
+/* API called when user wants to change it's password */
 app.post('/api/changePassword', (req, res) => {
-
   fs.readFile('./data/loginData.json', (err, data) => {
     let status = false;
     let dataArray = JSON.parse(data);
